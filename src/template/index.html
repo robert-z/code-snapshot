@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta http-equiv="Content-Security-Policy" content="img-src vscode-resource: data: https:; script-src vscode-resource:; style-src 'unsafe-inline' vscode-resource:;" />
         <style>
         html {
             box-sizing: border-box;
@@ -62,7 +63,7 @@
                 </header>
                 
                 <code>
-                    <h1>Hello World</h1>
+                    #{code}
                 </code>
             </section>
 
@@ -70,21 +71,7 @@
                 <div id="size"></div>
             </footer>
         </section>
-
-        <script>
-            if (ResizeObserver) {
-                const snippet = document.getElementById('snippet');
-                const size = document.getElementById('size');
-
-                const resizeObserver = new ResizeObserver(entries => {
-                let w = Math.round(entries[0].contentRect.width);
-                let h = Math.round(entries[0].contentRect.height);
-
-                size.textContent = w + "x" + h;
-                });
-
-                resizeObserver.observe(snippet);
-            }
-        </script>
+        
+        <script src="../assets/js/main.js"></script>
     </body>
 </html>

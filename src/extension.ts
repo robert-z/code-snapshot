@@ -10,6 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "code-snapshot" is now active!');
 
 	const htmlTemplatePath = path.resolve(context.extensionPath, "src/template/index.html");
+	
 	let panel: vscode.WebviewPanel;
 
 	let disposableCodeSnapshotInit = vscode.commands.registerCommand('extension.code.snapshot.init', () => {
@@ -19,13 +20,24 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.ViewColumn.Two,
 			{
 				enableScripts: true,
+				localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'src', 'assets'))]
 			}
 		);
 		
-		panel.webview.html = fs.readFileSync(htmlTemplatePath, "utf-8");
+		panel.webview.html = getTemplate(htmlTemplatePath);
 	});
 
 	context.subscriptions.push(disposableCodeSnapshotInit);
 }
 
 export function deactivate() {}
+
+function getTemplate(htmlTemplatePath:string) {
+	const htmlContent = fs.readFileSync(htmlTemplatePath, "utf-8");
+	return htmlContent.replace(/script src="([^"]*)"/g, (match, src) => {
+		let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src)).with({
+			scheme: "vscode-resource"
+		}).toString();
+		return `script src="${assetsPath}"`
+	})
+}
