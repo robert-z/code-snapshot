@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <style>
+        html {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+        #snippet-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background: #E0EAFC;
+            background: -webkit-linear-gradient(to bottom, #CFDEF3, #E0EAFC);
+            background: linear-gradient(to bottom, #CFDEF3, #E0EAFC);
+
+        }
+        #snippet-container > footer {
+            color: #000000;
+            padding: 10px 15px;
+        }
+        #snippet {
+            background: #121212;
+            overflow: hidden;
+            resize: both;
+            display: flex;
+            flex-direction: column;
+            padding: 18px;
+            margin-top: 64px;
+            margin-bottom: 64px;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.55) 0 20px 68px;
+            width: calc(100% - 4rem);
+            min-width: 54px;
+            min-height: 14px;
+        }
+        #snippet > header {
+            margin-bottom: 15px;
+        }
+        </style>
+    </head>
+    <body>
+        <section id="snippet-container">
+            <section id="snippet">
+                <header>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
+                        <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                        <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
+                        <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle>
+                        <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
+                        </g>
+                    </svg>
+                </header>
+                
+                <code>
+                    <h1>Hello World</h1>
+                </code>
+            </section>
+
+            <footer>
+                <div id="size"></div>
+            </footer>
+        </section>
+    </body>
+</html>
