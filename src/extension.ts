@@ -16,7 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
 		panel = vscode.window.createWebviewPanel(
 			VIEW_TYPE,
 			WEB_VIEW_TITLE,
-			vscode.ViewColumn.Two
+			vscode.ViewColumn.Two,
+			{
+				enableScripts: true,
+			}
 		);
 		
 		panel.webview.html = fs.readFileSync(htmlTemplatePath, "utf-8");
