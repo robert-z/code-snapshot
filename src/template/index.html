@@ -32,20 +32,24 @@
         #snippet {
             background: #121212;
             overflow: hidden;
-            resize: both;
+            resize: both;                                                                                                                                                                                                                                                   
             display: flex;
             flex-direction: column;
             padding: 18px;
-            margin-top: 64px;
-            margin-bottom: 64px;
+            margin-top: 50px;
+            margin-bottom: 50px;
             border-radius: 5px;
             box-shadow: rgba(0, 0, 0, 0.55) 0 20px 68px;
-            width: calc(100% - 4rem);
+            width: calc(100% - 8rem);
             min-width: 54px;
             min-height: 14px;
         }
         #snippet > header {
             margin-bottom: 15px;
+        }
+        #snippet > code {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
         </style>
     </head>
@@ -62,9 +66,7 @@
                     </svg>
                 </header>
                 
-                <code>
-                    #{code}
-                </code>
+                <code></code>
             </section>
 
             <footer>

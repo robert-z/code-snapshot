@@ -14,6 +14,13 @@ export function activate(context: vscode.ExtensionContext) {
 	let panel: vscode.WebviewPanel;
 
 	let disposableCodeSnapshotInit = vscode.commands.registerCommand('extension.code.snapshot.init', () => {
+		const activeTextEditor = vscode.window.activeTextEditor;
+
+		if (!activeTextEditor) {
+			vscode.window.showErrorMessage("Open a file first to copy text");
+			return;
+		}
+
 		panel = vscode.window.createWebviewPanel(
 			VIEW_TYPE,
 			WEB_VIEW_TITLE,
@@ -23,8 +30,19 @@ export function activate(context: vscode.ExtensionContext) {
 				localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'src', 'assets'))]
 			}
 		);
-		
+
 		panel.webview.html = getTemplate(htmlTemplatePath);
+
+		vscode.window.onDidChangeTextEditorSelection(e => {
+			if (!e.textEditor.selection.isEmpty) {
+				let code = activeTextEditor.document.getText(e.textEditor.selection);
+
+			  	panel.webview.postMessage({
+					type: 'update',
+					code
+			  	})
+			}
+		})
 	});
 
 	context.subscriptions.push(disposableCodeSnapshotInit);
@@ -32,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {}
 
-function getTemplate(htmlTemplatePath:string) {
+const getTemplate = (htmlTemplatePath:string) => {
 	const htmlContent = fs.readFileSync(htmlTemplatePath, "utf-8");
 	return htmlContent.replace(/script src="([^"]*)"/g, (match, src) => {
 		let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src)).with({
