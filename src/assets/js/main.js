@@ -1,5 +1,4 @@
 (() => {
-    const vscode = acquireVsCodeApi();
     const snippetNode = document.getElementById('snippet');
     const codeNode = snippetNode.querySelector('code');
     const sizeNode = document.getElementById('size');
