@@ -19,7 +19,16 @@
     });
 
     shootNode.addEventListener('click', e => {
-        domtoimage.toBlob(snippetContainerNode)
+        domtoimage.toBlob(snippetContainerNode, {
+            width: snippetNode.offsetWidth * 2 + 100,
+            height: snippetNode.offsetHeight * 2 + 100,
+            style: {
+                'transform': 'scale(2)',
+                'transform-origin': 'center',
+                'background': '#E0EAFC',
+                'background': 'linear-gradient(to bottom, #CFDEF3, #E0EAFC)'
+            }
+        })
         .then(function (blob) {
             window.saveAs(blob, 'code-snapshot.png');
         });
