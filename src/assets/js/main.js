@@ -1,9 +1,9 @@
 (() => {
-    const snippetContainerNode = document.getElementById('snippet-container');
-    const snippetNode = document.getElementById('snippet');
-    const codeNode = snippetNode.querySelector('code');
-    const sizeNode = document.getElementById('size');
-    const shootNode = document.getElementById('shoot');
+    const snippetContainerNode  = document.getElementById('snippet-container');
+    const snippetNode           = document.getElementById('snippet');
+    const codeNode              = snippetNode.querySelector('code');
+    const sizeNode              = document.getElementById('size');
+    const shootNode             = document.getElementById('shoot');
 
     window.addEventListener('message', e => {
         switch(e.data.type) {
@@ -19,17 +19,22 @@
     });
 
     shootNode.addEventListener('click', e => {
+        snippetContainerNode.style.resize = 'none',
+        snippetNode.style.resize = 'none',
+
         domtoimage.toBlob(snippetContainerNode, {
-            width: snippetNode.offsetWidth * 2 + 100,
-            height: snippetNode.offsetHeight * 2 + 100,
+            width: snippetContainerNode.offsetWidth * 2,
+            height: snippetContainerNode.offsetHeight * 2,
             style: {
                 'transform': 'scale(2)',
                 'transform-origin': 'center',
-                'background': '#E0EAFC',
-                'background': 'linear-gradient(to bottom, #CFDEF3, #E0EAFC)'
+                'background': '#e0eafc',
+                'background': 'linear-gradient(to left, #e0eafc, #cfdef3);'
             }
         })
         .then(function (blob) {
+            snippetContainerNode.style.resize = '',
+            snippetNode.style.resize = '',
             window.saveAs(blob, 'code-snapshot.png');
         });
     });
