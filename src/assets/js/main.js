@@ -1,14 +1,20 @@
 (() => {
+    const vscode = acquireVsCodeApi();
     const snippetNode = document.getElementById('snippet');
     const codeNode = snippetNode.querySelector('code');
     const sizeNode = document.getElementById('size');
 
     window.addEventListener('message', e => {
         switch(e.data.type) {
-            case 'update':
-                codeNode.innerHTML = e.data.code
+            case 'updateCode':
+                document.execCommand('paste')
             break;
         }
+    });
+
+    document.addEventListener('paste', event => {
+        const code = event.clipboardData.getData('text/html')
+        codeNode.innerHTML = code
     });
 
     if (ResizeObserver) {

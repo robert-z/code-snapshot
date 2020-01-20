@@ -35,11 +35,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 		vscode.window.onDidChangeTextEditorSelection(e => {
 			if (!e.textEditor.selection.isEmpty) {
-				let code = activeTextEditor.document.getText(e.textEditor.selection);
-
+				vscode.commands.executeCommand('editor.action.clipboardCopyAction');
+				
 			  	panel.webview.postMessage({
-					type: 'update',
-					code
+					type: 'updateCode',
 			  	})
 			}
 		})
