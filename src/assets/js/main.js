@@ -1,7 +1,9 @@
 (() => {
+    const snippetContainerNode = document.getElementById('snippet-container');
     const snippetNode = document.getElementById('snippet');
     const codeNode = snippetNode.querySelector('code');
     const sizeNode = document.getElementById('size');
+    const shootNode = document.getElementById('shoot');
 
     window.addEventListener('message', e => {
         switch(e.data.type) {
@@ -14,6 +16,13 @@
     document.addEventListener('paste', event => {
         const code = event.clipboardData.getData('text/html')
         codeNode.innerHTML = code
+    });
+
+    shootNode.addEventListener('click', e => {
+        domtoimage.toBlob(snippetContainerNode)
+        .then(function (blob) {
+            window.saveAs(blob, 'code-snapshot.png');
+        });
     });
 
     if (ResizeObserver) {
