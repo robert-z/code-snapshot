@@ -41,12 +41,15 @@
 
     if (ResizeObserver) {
         const resizeObserver = new ResizeObserver(entries => {
-            let w = Math.round(entries[0].contentRect.width);
-            let h = Math.round(entries[0].contentRect.height);
+            // let w = Math.round(entries[0].contentRect.width) * 2;
+            // let h = Math.round(entries[0].contentRect.height) * 2;
+            let w = Math.round(snapshotContainerNode.offsetWidth) * 2;
+            let h = Math.round(snapshotContainerNode.offsetHeight) * 2;
 
             sizeNode.textContent = w + "x" + h;
         });
 
+        resizeObserver.observe(snapshotContainerNode);
         resizeObserver.observe(terminalNode);
     }
 })();
