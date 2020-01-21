@@ -11,10 +11,10 @@
             display: flex;
             flex-flow: column;
             align-items: center;
-            padding: 0;
+            padding: 20px;
             margin: 0;
         }
-        #snippet-container {
+        .snapshot-container {
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -27,11 +27,7 @@
             background: -webkit-linear-gradient(to bottom, #CFDEF3, #E0EAFC);
             background: linear-gradient(to bottom, #CFDEF3, #E0EAFC);
         }
-        #snippet-container > footer {
-            color: #000000;
-            padding: 10px 15px;
-        }
-        #snippet {
+        .terminal {
             background: var(--vscode-editor-background);
             overflow: hidden;
             resize: both;
@@ -46,10 +42,10 @@
             min-width: 54px;
             min-height: 14px;
         }
-        #snippet > header {
+        .terminal__header {
             margin-bottom: 15px;
         }
-        #snippet > code > * {
+        .terminal__code > * {
             overflow-wrap: break-word;
             word-wrap: break-word;
             white-space: pre-wrap !important;
@@ -57,9 +53,9 @@
         </style>
     </head>
     <body>
-        <section id="snippet-container">
-            <section id="snippet">
-                <header>
+        <section class="snapshot-container">
+            <section class="terminal">
+                <header class="terminal__header">
                     <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
                         <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
                         <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
@@ -68,15 +64,14 @@
                         </g>
                     </svg>
                 </header>
-                
-                <code></code>
+                <code class="terminal__code"></code>
             </section>
         </section>   
         
-        <button id="shoot">download</button>
+        <button class="shoot">download</button>
         
         <footer>
-            <div id="size"></div>
+            <div class="size"></div>
         </footer>
 
         <script src="../assets/js/FileSaver.min.js"></script>

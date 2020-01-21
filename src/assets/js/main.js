@@ -1,9 +1,9 @@
 (() => {
-    const snippetContainerNode  = document.getElementById('snippet-container');
-    const snippetNode           = document.getElementById('snippet');
-    const codeNode              = snippetNode.querySelector('code');
-    const sizeNode              = document.getElementById('size');
-    const shootNode             = document.getElementById('shoot');
+    const snapshotContainerNode = document.querySelector('.snapshot-container');
+    const terminalNode          = document.querySelector('.terminal');
+    const terminalCodeNode      = terminalNode.querySelector('.terminal__code');
+    const sizeNode              = document.querySelector('.size');
+    const shootNode             = document.querySelector('.shoot');
 
     window.addEventListener('message', e => {
         switch(e.data.type) {
@@ -15,16 +15,16 @@
 
     document.addEventListener('paste', event => {
         const code = event.clipboardData.getData('text/html')
-        codeNode.innerHTML = code
+        terminalCodeNode.innerHTML = code
     });
 
     shootNode.addEventListener('click', e => {
-        snippetContainerNode.style.resize = 'none',
-        snippetNode.style.resize = 'none',
+        snapshotContainerNode.style.resize = 'none',
+        terminalNode.style.resize = 'none',
 
-        domtoimage.toBlob(snippetContainerNode, {
-            width: snippetContainerNode.offsetWidth * 2,
-            height: snippetContainerNode.offsetHeight * 2,
+        domtoimage.toBlob(snapshotContainerNode, {
+            width: snapshotContainerNode.offsetWidth * 2,
+            height: snapshotContainerNode.offsetHeight * 2,
             style: {
                 'transform': 'scale(2)',
                 'transform-origin': 'center',
@@ -33,8 +33,8 @@
             }
         })
         .then(function (blob) {
-            snippetContainerNode.style.resize = '',
-            snippetNode.style.resize = '',
+            snapshotContainerNode.style.resize = '',
+            terminalNode.style.resize = '',
             window.saveAs(blob, 'code-snapshot.png');
         });
     });
@@ -47,6 +47,6 @@
             sizeNode.textContent = w + "x" + h;
         });
 
-        resizeObserver.observe(snippetNode);
+        resizeObserver.observe(terminalNode);
     }
 })();
