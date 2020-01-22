@@ -9,47 +9,49 @@ export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "code-snapshot" is now active!');
 
-	const htmlTemplatePath = path.resolve(context.extensionPath, "src/template/index.html");
-	
-	let panel: vscode.WebviewPanel;
-
 	let disposableCodeSnapshotInit = vscode.commands.registerCommand('extension.code.snapshot.init', () => {
 		const activeTextEditor = vscode.window.activeTextEditor;
 
-		if (!activeTextEditor) {
-			vscode.window.showErrorMessage("Open a file first to copy text");
-			return;
-		}
+		const panel = createPanel(context);
 
-		panel = vscode.window.createWebviewPanel(
-			VIEW_TYPE,
-			WEB_VIEW_TITLE,
-			vscode.ViewColumn.Two,
-			{
-				enableScripts: true,
-				localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'src', 'assets'))]
+		const selectionHandler = vscode.window.onDidChangeTextEditorSelection(e => {
+			if (hasTextSelected(activeTextEditor?.selection)) {
+				update(panel)
 			}
-		);
+		});
 
-		panel.webview.html = getTemplate(htmlTemplatePath);
-
-		vscode.window.onDidChangeTextEditorSelection(e => {
-			if (!e.textEditor.selection.isEmpty) {
-				vscode.commands.executeCommand('editor.action.clipboardCopyAction');
-				
-			  	panel.webview.postMessage({
-					type: 'updateCode',
-			  	})
-			}
-		})
+		panel.onDidDispose(() => selectionHandler.dispose());
 	});
 
 	context.subscriptions.push(disposableCodeSnapshotInit);
 }
 
-export function deactivate() {}
+const update = (panel:vscode.WebviewPanel): void => {
+	vscode.commands.executeCommand('editor.action.clipboardCopyAction');
+		
+	panel.webview.postMessage({
+		type: 'updateCode',
+	});
+};
 
-const getTemplate = (htmlTemplatePath:string) => {
+const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => {
+	const htmlTemplatePath = path.resolve(context.extensionPath, "src/template/index.html");
+	const panel = vscode.window.createWebviewPanel(
+		VIEW_TYPE,
+		WEB_VIEW_TITLE,
+		vscode.ViewColumn.Two,
+		{
+			enableScripts: true,
+			localResourceRoots: [vscode.Uri.file(context.extensionPath)]
+		}
+	);
+
+	panel.webview.html = getTemplate(htmlTemplatePath);
+
+	return panel;
+};
+
+const getTemplate = (htmlTemplatePath:string): string => {
 	const htmlContent = fs.readFileSync(htmlTemplatePath, "utf-8");
 	return htmlContent.replace(/script src="([^"]*)"/g, (match, src) => {
 		let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src)).with({
@@ -58,3 +60,7 @@ const getTemplate = (htmlTemplatePath:string) => {
 		return `script src="${assetsPath}"`
 	})
 }
+
+const hasTextSelected = (selection:vscode.Selection | undefined): Boolean => !!selection && !selection.isEmpty;
+
+export function deactivate() {}
