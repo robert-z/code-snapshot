@@ -1,14 +1,55 @@
 {
 	"name": "code-snapshot",
 	"displayName": "Code Snapshot",
-	"description": "",
+	"description": "Create your custom code snippet",
 	"version": "0.0.1",
+	"publisher": "robertz",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
+	"icon": "icon.png",
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"snapshot",
+		"snippet",
+		"code",
+		"screenshot",
+		"javascript",
+		"js",
+		"jsx",
+		"flow",
+		"typescript",
+		"ts",
+		"json",
+		"css",
+		"less",
+		"scss",
+		"styled-components",
+		"styled-jsx",
+		"markdown",
+		"md",
+		"commonmark",
+		"mdx",
+		"php",
+		"pug",
+		"ruby",
+		"swift",
+		"html",
+		"vue",
+		"angular",
+		"graphql",
+		"yaml",
+		"yml"
+	],
+	"repository": {
+		"type": "git",
+	  	"url": "https://github.com/robert-z/code-snapshot"
+	},
+	"bugs": {
+		"url": "https://github.com/robert-z/code-snapshot/issues"
+	},
 	"activationEvents": [
 		"onCommand:extension.code.snapshot.init"
 	],
