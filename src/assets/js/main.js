@@ -4,7 +4,8 @@
     const terminalCodeNode      = terminalNode.querySelector('.terminal__code');
     const sizeNode              = document.querySelector('.size');
     const shootNode             = document.querySelector('.shoot');
-
+    const lottieCamera          = document.querySelector('.lottie');
+    
     window.addEventListener('message', e => {
         switch(e.data.type) {
             case 'updateCode':
@@ -38,6 +39,22 @@
             window.saveAs(blob, 'code-snapshot.png');
         });
     });
+
+    const lottieAnimationCamera = bodymovin.loadAnimation({
+        container: lottieCamera,
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'https://assets6.lottiefiles.com/packages/lf20_O67fb5.json'
+    })
+
+    lottieAnimationCamera.addEventListener('data_ready', event => {
+        lottieAnimationCamera.playSegments([0, 30], true);
+    });
+
+    lottieCamera.addEventListener('click', event => {
+        lottieAnimationCamera.playSegments([30, 60], true);
+    })
 
     if (ResizeObserver) {
         const resizeObserver = new ResizeObserver(entries => {
