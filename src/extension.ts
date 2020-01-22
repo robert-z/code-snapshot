@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "code-snapshot" is now active!');
 
-	let disposableCodeSnapshotInit = vscode.commands.registerCommand('extension.code.snapshot.init', () => {
+	let disposableCodeSnapshotInit = vscode.commands.registerCommand('codesnapshot.init', () => {
 		const activeTextEditor = vscode.window.activeTextEditor;
 
 		const panel = createPanel(context);
@@ -21,6 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 
 		panel.onDidDispose(() => selectionHandler.dispose());
+
+		if (hasTextSelected(activeTextEditor?.selection)) update(panel);
 	});
 
 	context.subscriptions.push(disposableCodeSnapshotInit);

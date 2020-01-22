@@ -51,16 +51,23 @@
 		"url": "https://github.com/robert-z/code-snapshot/issues"
 	},
 	"activationEvents": [
-		"onCommand:extension.code.snapshot.init"
+		"onCommand:codesnapshot.init"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.code.snapshot.init",
+				"command": "codesnapshot.init",
 				"title": "Code Snapshot"
 			}
-		]
+		],
+		"menus": {
+		  "editor/context": [
+			{
+			  "command": "codesnapshot.init"
+			}
+		  ]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
