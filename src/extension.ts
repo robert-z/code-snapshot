@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { inherits } from 'util';
 
 const VIEW_TYPE = 'codeSnapshot';
 const WEB_VIEW_TITLE = 'Code Snapshot';
@@ -23,7 +22,7 @@ const init = (context: vscode.ExtensionContext) => {
 }
 
 const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => {
-	const htmlTemplatePath = path.resolve(context.extensionPath, "src/template/index.html");
+	const htmlTemplatePath = path.resolve(context.extensionPath, "webview/index.html");
 	const panel = vscode.window.createWebviewPanel(
 		VIEW_TYPE,
 		WEB_VIEW_TITLE,
@@ -41,7 +40,7 @@ const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => 
 
 const getTemplate = (htmlTemplatePath:string): string => {
 	const htmlContent = fs.readFileSync(htmlTemplatePath, "utf-8");
-	return htmlContent.replace(/script src="([^"]*)"/g, (match, src) => {
+	return htmlContent.replace(/script src="([^"]*)"/g, (_match, src) => {
 		let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src)).with({
 			scheme: "vscode-resource"
 		}).toString();
