@@ -1,40 +1,26 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import { inherits } from 'util';
 
 const VIEW_TYPE = 'codeSnapshot';
 const WEB_VIEW_TITLE = 'Code Snapshot';
 
-export function activate(context: vscode.ExtensionContext) {
+const init = (context: vscode.ExtensionContext) => {
+	const activeTextEditor = vscode.window.activeTextEditor;
 
-	console.log('Congratulations, your extension "code-snapshot" is now active!');
+	const panel = createPanel(context);
 
-	let disposableCodeSnapshotInit = vscode.commands.registerCommand('codesnapshot.init', () => {
-		const activeTextEditor = vscode.window.activeTextEditor;
-
-		const panel = createPanel(context);
-
-		const selectionHandler = vscode.window.onDidChangeTextEditorSelection(e => {
-			if (hasTextSelected(activeTextEditor?.selection)) {
-				update(panel)
-			}
-		});
-
-		panel.onDidDispose(() => selectionHandler.dispose());
-
-		if (hasTextSelected(activeTextEditor?.selection)) update(panel);
+	const selectionHandler = vscode.window.onDidChangeTextEditorSelection(e => {
+		if (hasTextSelected(e.textEditor.selection)) {
+			update(panel)
+		}
 	});
 
-	context.subscriptions.push(disposableCodeSnapshotInit);
+	panel.onDidDispose(() => selectionHandler.dispose());
+
+	if (hasTextSelected(activeTextEditor?.selection)) update(panel);
 }
-
-const update = (panel:vscode.WebviewPanel): void => {
-	vscode.commands.executeCommand('editor.action.clipboardCopyAction');
-		
-	panel.webview.postMessage({
-		type: 'updateCode',
-	});
-};
 
 const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => {
 	const htmlTemplatePath = path.resolve(context.extensionPath, "src/template/index.html");
@@ -63,6 +49,20 @@ const getTemplate = (htmlTemplatePath:string): string => {
 	})
 }
 
+const update = (panel:vscode.WebviewPanel): void => {
+	vscode.commands.executeCommand('editor.action.clipboardCopyAction');
+	
+	panel.webview.postMessage({
+		type: 'updateCode',
+	});
+};
+
 const hasTextSelected = (selection:vscode.Selection | undefined): Boolean => !!selection && !selection.isEmpty;
 
-export function deactivate() {}
+export const activate = (context: vscode.ExtensionContext) => {
+	return context.subscriptions.push(
+		vscode.commands.registerCommand('codesnapshot.init', () => init(context))
+	);
+}
+
+export const deactivate = () => {}

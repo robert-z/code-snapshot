@@ -1,23 +1,29 @@
 (() => {
-    const snapshotContainerNode = document.querySelector('.snapshot-container');
-    const terminalNode          = document.querySelector('.terminal');
-    const terminalCodeNode      = terminalNode.querySelector('.terminal__code');
-    const sizeNode              = document.querySelector('.size');
-    const shootNode             = document.querySelector('.shoot');
-    const lottieCamera          = document.querySelector('.lottie');
+    const snapshotContainerNode     = document.querySelector('.snapshot-container');
+    const terminalNode              = document.querySelector('.terminal');
+    const terminalCodeSnippetNode   = terminalNode.querySelector('.terminal__code-snippet');
+    const sizeNode                  = document.querySelector('.size');
+    const shootNode                 = document.querySelector('.shoot');
+    const lottieCamera              = document.querySelector('.lottie');
     
-    window.addEventListener('message', e => {
-        switch(e.data.type) {
+    window.addEventListener('message', ({ data: { type } }) => {
+        switch(type) {
             case 'updateCode':
                 document.execCommand('paste')
             break;
         }
     });
-
+    
     document.addEventListener('paste', event => {
-        const code = event.clipboardData.getData('text/html')
-        terminalCodeNode.innerHTML = code
+        pasteCode(event.clipboardData, terminalCodeSnippetNode);
     });
+    
+    const getHtml = clip => clip.getData('text/html')
+
+    const pasteCode = (clip, element) => {
+        const code = getHtml(clip);
+        element.innerHTML = code;
+    }
 
     shootNode.addEventListener('click', e => {
         snapshotContainerNode.style.resize = 'none',
