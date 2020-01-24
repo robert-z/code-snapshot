@@ -1,8 +1,6 @@
 # Code Snapshot
 
-Take beautiful screenshots of your code in VS Code.
-
-`Code Snapshot` is a VS Code extension that tries to make your life easier. When you are coding, you may want to take a photo of your work to share it in your social media or presentations. `Code Snapshot` is your tool! Open the extension, select the code that you want to share and take a photo 📸.
+`Code Snapshot` is a VS Code extension that tries to make your life easier. When you are coding, you may want to take a photo of your work to share it in your social media or presentations. `Code Snapshot` is your tool! Open the extension, select the code that you want to share and take beautiful screenshots of your code.
 
 ## Features
 - Save screenshots of your code
