@@ -10,6 +10,18 @@ body {
     padding: 20px;
     margin: 0;
 }
+.header {
+    width: calc(100% - 4rem);
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    vertical-align: bottom;
+}
+.header__size {
+    display: flex;
+    align-items: flex-end;
+}
 .snapshot-container {
     width: calc(100% - 4rem);
     overflow: hidden;
@@ -21,6 +33,7 @@ body {
 }
 .snapshot-container__background {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -58,13 +71,6 @@ body {
     padding: 2px;
     cursor: pointer;
     margin: 20px 0;
-}
-footer {
-    width: calc(100% - 4rem);
-    margin: 20px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .clpi {

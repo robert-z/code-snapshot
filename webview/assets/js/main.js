@@ -3,7 +3,7 @@
     const snapshotContainerBackgroundNode   = document.querySelector('.snapshot-container__background');
     const terminalNode                      = document.querySelector('.terminal');
     const terminalCodeSnippetNode           = document.querySelector('.terminal__code-snippet');
-    const sizeNode                          = document.querySelector('.size');
+    const sizeNode                          = document.querySelector('.header__size');
     const shootNode                         = document.querySelector('.shoot');
     const lottieCamera                      = document.querySelector('.lottie');
     const transparentBackground             = document.querySelector('.options_transparent-background');
