@@ -1,90 +1,43 @@
 <html>
     <head>
         <meta http-equiv="Content-Security-Policy" content="img-src vscode-resource: data: https:; script-src vscode-resource:; style-src 'unsafe-inline' vscode-resource:;" />
-        <style>
-        html {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            padding: 20px;
-            margin: 0;
-        }
-        .snapshot-container {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            width: calc(100% - 4rem);
-            overflow: hidden;
-            resize: both;
-            border-radius: 5px;
-            background: #E0EAFC;
-            background: -webkit-linear-gradient(to bottom, #CFDEF3, #E0EAFC);
-            background: linear-gradient(to bottom, #CFDEF3, #E0EAFC);
-        }
-        .terminal {
-            background: var(--vscode-editor-background);
-            overflow: hidden;
-            resize: both;
-            display: flex;
-            flex-direction: column;
-            padding: 18px;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.55) 0 20px 68px;
-            width: calc(100% - 8rem);
-            min-width: 54px;
-            min-height: 14px;
-        }
-        .terminal__header {
-            margin-bottom: 15px;
-        }
-        .terminal__code-snippet > * {
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            white-space: pre-wrap !important;
-        }
-        .lottie {
-            background: #E0EAFC;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            padding: 2px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-        </style>
+        <link rel="stylesheet" type="text/css" href="./assets/css/colorPicker.css">
+        <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
     </head>
     <body>
         <section class="snapshot-container">
-            <section class="terminal">
-                <header class="terminal__header">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
-                        <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
-                        <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
-                        <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle>
-                        <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
-                        </g>
-                    </svg>
-                </header>
-                <code class="terminal__code-snippet"></code>
-            </section>
+            <div class="snapshot-container__background">
+                <section class="terminal">
+                    <header class="terminal__header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14">
+                            <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                            <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
+                            <circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle>
+                            <circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle>
+                            </g>
+                        </svg>
+                    </header>
+                    <code class="terminal__code-snippet"></code>
+                </section>
+            </div>
         </section>   
                 
-        <div class="lottie shoot"></div>
 
         <footer>
+            <div class="options">
+                <label>
+                    <input type="text" class="clpi" value="#CFDEF3" />
+                </label>
+            </div>
             <div class="size"></div>
         </footer>
+        
+        <div class="lottie shoot"></div>
+
         <script src="../node_modules/lottie-web/build/player/lottie.min.js"></script>
         <script src="../node_modules/file-saver/dist/FileSaver.min.js"></script>
         <script src="../node_modules/dom-to-image/dist/dom-to-image.min.js"></script>
+        <script src="./assets/js/colorPicker.js"></script>
         <script src="./assets/js/main.js"></script>
     </body>
 </html>

@@ -40,11 +40,11 @@ const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => 
 
 const getTemplate = (htmlTemplatePath:string): string => {
 	const htmlContent = fs.readFileSync(htmlTemplatePath, "utf-8");
-	return htmlContent.replace(/script src="([^"]*)"/g, (_match, src) => {
+	return htmlContent.replace(/(src|href)="([^"]*)"/gu, (_, match, src) => {
 		let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src)).with({
 			scheme: "vscode-resource"
 		}).toString();
-		return `script src="${assetsPath}"`
+		return `${match}="${assetsPath}"`
 	})
 }
 
