@@ -23,6 +23,7 @@ const init = (context: vscode.ExtensionContext) => {
 
 const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => {
 	const htmlTemplatePath = path.resolve(context.extensionPath, "webview/index.html");
+	const iconPath = path.resolve(context.extensionPath, "webview/assets/images/icon-label.png");
 	const panel = vscode.window.createWebviewPanel(
 		VIEW_TYPE,
 		WEB_VIEW_TITLE,
@@ -32,6 +33,8 @@ const createPanel = (context: vscode.ExtensionContext) : vscode.WebviewPanel => 
 			localResourceRoots: [vscode.Uri.file(context.extensionPath)]
 		}
 	);
+	
+	panel.iconPath = vscode.Uri.file(iconPath);
 
 	panel.webview.html = getTemplate(htmlTemplatePath);
 
