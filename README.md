@@ -24,7 +24,5 @@ The source for this extension is available on [github](https://github.com/robert
 
 - [Artem (@komarovartem)](https://github.com/komarovartem) for [colorPicker](https://github.com/komarovartem/colorPicker), a simple JavaScript colorpicker which supports transparency and gradient.
 
-- [Lottie web](https://github.com/airbnb/lottie-web) - A library that parses Adobe After Effects animations exported as json.
-
 ## License
 [MIT](https://opensource.org/licenses/MIT)

@@ -1,22 +1,17 @@
 (() => {
+    const vscode = acquireVsCodeApi()
     const snapshotContainerNode             = document.querySelector('.snapshot-container');
     const snapshotContainerBackgroundNode   = document.querySelector('.snapshot-container__background');
     const terminalNode                      = document.querySelector('.terminal');
     const terminalCodeSnippetNode           = document.querySelector('.terminal__code-snippet');
     const sizeNode                          = document.querySelector('.header__size');
     const shootNode                         = document.querySelector('.shoot');
-    const lottieCamera                      = document.querySelector('.lottie');
-    const transparentBackground             = document.querySelector('.options_transparent-background');
-    
+
     const getHtml = clip => clip.getData('text/html')
     
     const pasteCode = (clip, element) => {
         const code = getHtml(clip);
         element.innerHTML = code;
-    }
-    
-    const shootAnimation = () => {
-        lottieAnimationCamera.playSegments([30, 60], true);
     }
 
     window.addEventListener('message', ({ data: { type } }) => {
@@ -32,8 +27,6 @@
     });
     
     shootNode.addEventListener('click', e => {
-        shootAnimation();
-
         snapshotContainerNode.style.resize = 'none';
         terminalNode.style.resize = 'none';
         
@@ -58,19 +51,6 @@
         let i = data.detail.el;
         snapshotContainerBackgroundNode.style.backgroundColor = i.value;
     });
-
-    const lottieAnimationCamera = bodymovin.loadAnimation({
-        container: lottieCamera,
-        renderer: 'svg',
-        loop: false,
-        autoplay: false,
-        path: 'https://assets6.lottiefiles.com/packages/lf20_O67fb5.json'
-    })
-
-    lottieAnimationCamera.addEventListener('data_ready', event => {
-        lottieAnimationCamera.playSegments([0, 30], true);
-    });
-
 
     colorPicker.initAll()
 

@@ -63,14 +63,20 @@ body {
     word-wrap: break-word;
     white-space: pre-wrap !important;
 }
-.lottie {
+.shoot {
     background: #E0EAFC;
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    padding: 2px;
+    padding: 0;
     cursor: pointer;
     margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+.shoot svg {
+    display: flex;
+    align-self: center;
 }
 
 .clpi {
