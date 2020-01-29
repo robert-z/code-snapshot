@@ -43,6 +43,7 @@
 		"yaml",
 		"yml"
 	],
+	"homepage": "https://marketplace.visualstudio.com/items?itemName=robertz.code-snapshot",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/robert-z/code-snapshot"
@@ -53,7 +54,7 @@
 	"activationEvents": [
 		"onCommand:codesnapshot.init"
 	],
-	"main": "./dist/extension.js",
+	"main": "./dist/extension",
 	"contributes": {
 		"commands": [
 			{
@@ -70,10 +71,13 @@
 		}
 	},
 	"scripts": {
+		"test": "node ./out/test/runTests.js",
+		"vscode:package": "vsce package",
+		"vscode:publish": "vsce publish",
 		"vscode:prepublish": "webpack --mode production",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
-		"test-compile": "tsc -p ./"
+		"watch": "tsc --watch -p ./",
+		"webpack:watch": "webpack --mode development --watch",
+		"webpack": "webpack --mode development"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
