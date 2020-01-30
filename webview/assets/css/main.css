@@ -64,19 +64,23 @@ body {
     white-space: pre-wrap !important;
 }
 .shoot {
-    background: #E0EAFC;
-    border-radius: 50%;
     width: 40px;
     height: 40px;
     padding: 0;
     cursor: pointer;
     margin: 20px 0;
-    display: flex;
-    justify-content: center;
+    transition: all 800ms ease-in-out;
+}
+.shoot:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
 .shoot svg {
     display: flex;
     align-self: center;
+}
+.shoot:hover svg #border {
+    fill: #000;
 }
 
 .clpi {
