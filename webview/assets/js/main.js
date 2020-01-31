@@ -1,5 +1,4 @@
 (() => {
-    const vscode = acquireVsCodeApi()
     const snapshotContainerNode             = document.querySelector('.snapshot-container');
     const snapshotContainerBackgroundNode   = document.querySelector('.snapshot-container__background');
     const terminalNode                      = document.querySelector('.terminal');
@@ -7,11 +6,36 @@
     const sizeNode                          = document.querySelector('.header__size');
     const shootNode                         = document.querySelector('.shoot');
 
-    const getHtml = clip => clip.getData('text/html')
-    
     const pasteCode = (clip, element) => {
         const code = getHtml(clip);
         element.innerHTML = code;
+        setupLines(element);
+    }
+
+    const getHtml = clip => clip.getData('text/html')
+
+    const setupLines = node => {
+        node.innerHTML = replaceBrByDiv(node.innerHTML);
+        computedPseudoBeforeWidth(node);
+    }
+
+    const replaceBrByDiv = (str) => {
+        return str.replace( /(<br>)/ig, '<div>&nbsp;</div>');
+    }
+
+    const computedPseudoBeforeWidth = node => {
+        document.body.style.setProperty('--line-number-width', 'auto');
+        document.body.style.setProperty('--line-number-paddingLeft', 'auto');
+
+        let pseudoBeforeWidth = window.getComputedStyle(
+            node.querySelector('div > div:last-child'), 
+            ':before'
+        ).width;
+
+        const lineNumberMaxWidth = parseInt(pseudoBeforeWidth);
+
+        document.body.style.setProperty('--line-number-width', lineNumberMaxWidth + 'px');
+        document.body.style.setProperty('--line-number-paddingLeft', lineNumberMaxWidth + 15 + 'px');
     }
 
     window.addEventListener('message', ({ data: { type } }) => {

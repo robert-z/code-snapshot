@@ -58,10 +58,34 @@ body {
 .terminal__header {
     margin-bottom: 15px;
 }
-.terminal__code-snippet > * {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+.terminal__code-snippet > div {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    max-width: 100%;
     white-space: pre-wrap !important;
+    word-break: break-all;
+}
+.terminal__code-snippet > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    counter-increment: line-number;
+    overflow: hidden;
+    position: relative;
+    padding-left: var(--line-number-paddingLeft);
+}
+.terminal__code-snippet > div > div:before {
+    content: counter(line-number);
+    text-align: right;
+    color: var(--vscode-editorLineNumber-foreground);
+    margin-right: 18px;
+    width: var(--line-number-width);
+    white-space: nowrap;
+    flex: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
 }
 .shoot {
     width: 40px;
