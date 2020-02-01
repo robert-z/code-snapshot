@@ -25,7 +25,7 @@ body {
 .snapshot-container {
     width: calc(100% - 4rem);
     overflow: hidden;
-    resize: both;
+    resize: horizontal;
     border-radius: 5px;
     background-position: 0px 0px, 10px 10px;
     background-size: 20px 20px;
@@ -43,7 +43,7 @@ body {
 .terminal {
     background: var(--vscode-editor-background);
     overflow: hidden;
-    resize: both;
+    resize: horizontal;
     display: flex;
     flex-direction: column;
     padding: 18px;
@@ -66,20 +66,18 @@ body {
     white-space: pre-wrap !important;
     word-break: break-all;
 }
-.terminal__code-snippet > div > div {
+.terminal__code-snippet > div > div.editorLine {
+    width: calc(100% - var(--editor-line-padding-left));
+    padding-left: var(--editor-line-padding-left);
     display: flex;
     flex-wrap: wrap;
-    counter-increment: line-number;
-    overflow: hidden;
     position: relative;
-    padding-left: var(--line-number-paddingLeft);
 }
-.terminal__code-snippet > div > div:before {
-    content: counter(line-number);
-    text-align: right;
+.terminal__code-snippet > div > div.editorLine > .editorLineNumber {
     color: var(--vscode-editorLineNumber-foreground);
-    margin-right: 18px;
     width: var(--line-number-width);
+    font-family: var(--vscode-editor-font-family);
+    text-align: right;
     white-space: nowrap;
     flex: none;
     position: absolute;
@@ -87,6 +85,11 @@ body {
     bottom: 0;
     left: 0;
 }
+.editorLineNumber__test {
+    font-family: var(--vscode-editor-font-family) !important;
+    font-size: calc(var(--vscode-editor-font-size) * 1px) !important;
+    display: inline-block;
+  }
 .shoot {
     width: 40px;
     height: 40px;

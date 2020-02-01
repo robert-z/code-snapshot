@@ -9,33 +9,41 @@
     const pasteCode = (clip, element) => {
         const code = getHtml(clip);
         element.innerHTML = code;
-        setupLines(element);
+        setupTerminal(element);
     }
 
     const getHtml = clip => clip.getData('text/html')
 
-    const setupLines = node => {
+    const setupTerminal = node => {
         node.innerHTML = replaceBrByDiv(node.innerHTML);
-        computedPseudoBeforeWidth(node);
+        
+        const lines = node.querySelectorAll('div > div');
+
+        lines.forEach((row, index) => {
+            row.classList.add('editorLine');
+            const lineNumber = document.createElement('div');
+            lineNumber.classList.add('editorLineNumber');
+            lineNumber.textContent = index + 1;
+            row.insertBefore(lineNumber, row.firstChild);
+        });
+
+        const width = computeEdeditorLineNumberWidth(lines.length);
+
+        document.body.style.setProperty('--line-number-width', width + 'px');
+        document.body.style.setProperty('--editor-line-padding-left', width + 15 + 'px');
+    }
+
+    const computeEdeditorLineNumberWidth = text => {
+        const div = document.body.appendChild(document.createElement('div'));
+        div.classList.add('editorLineNumber__test');
+        div.textContent = text;
+        const width = div.clientWidth;
+        div.remove();
+        return width;
     }
 
     const replaceBrByDiv = (str) => {
         return str.replace( /(<br>)/ig, '<div>&nbsp;</div>');
-    }
-
-    const computedPseudoBeforeWidth = node => {
-        document.body.style.setProperty('--line-number-width', 'auto');
-        document.body.style.setProperty('--line-number-paddingLeft', 'auto');
-
-        let pseudoBeforeWidth = window.getComputedStyle(
-            node.querySelector('div > div:last-child'), 
-            ':before'
-        ).width;
-
-        const lineNumberMaxWidth = parseInt(pseudoBeforeWidth);
-
-        document.body.style.setProperty('--line-number-width', lineNumberMaxWidth + 'px');
-        document.body.style.setProperty('--line-number-paddingLeft', lineNumberMaxWidth + 15 + 'px');
     }
 
     window.addEventListener('message', ({ data: { type } }) => {
