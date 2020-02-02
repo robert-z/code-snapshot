@@ -29,7 +29,15 @@ body {
     border-radius: 5px;
     background-position: 0px 0px, 10px 10px;
     background-size: 20px 20px;
-    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
+    background-image: linear-gradient(
+            45deg,
+            #eee 25%,
+            transparent 25%,
+            transparent 75%,
+            #eee 75%,
+            #eee 100%
+        ),
+        linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
 }
 .snapshot-container__background {
     width: 100%;
@@ -38,7 +46,7 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: #CFDEF3;
+    background: #cfdef3;
 }
 .terminal {
     background: var(--vscode-editor-background);
@@ -69,13 +77,14 @@ body {
 .terminal__code-snippet > div > div.editorLine {
     width: calc(100% - var(--editor-line-padding-left));
     padding-left: var(--editor-line-padding-left);
+    min-height: var(--editor-line-min-height);
     display: flex;
     flex-wrap: wrap;
     position: relative;
 }
 .terminal__code-snippet > div > div.editorLine > .editorLineNumber {
     color: var(--vscode-editorLineNumber-foreground);
-    width: var(--line-number-width);
+    width: var(--editor-line-number-width);
     font-family: var(--vscode-editor-font-family);
     text-align: right;
     white-space: nowrap;
@@ -89,7 +98,7 @@ body {
     font-family: var(--vscode-editor-font-family) !important;
     font-size: calc(var(--vscode-editor-font-size) * 1px) !important;
     display: inline-block;
-  }
+}
 .shoot {
     width: 40px;
     height: 40px;

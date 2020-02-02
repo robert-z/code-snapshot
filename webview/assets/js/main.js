@@ -29,10 +29,17 @@
             row.insertBefore(lineNumber, row.firstChild);
         });
 
-        const width = computeEdeditorLineNumberWidth(lines.length);
+        const lineNumberWidth = computeEdeditorLineNumberWidth(lines.length);
+        const minHeight = computeMinLineHeight(node);
 
-        document.body.style.setProperty('--line-number-width', width + 'px');
-        document.body.style.setProperty('--editor-line-padding-left', width + 15 + 'px');
+        document.body.style.setProperty('--editor-line-number-width', lineNumberWidth + 'px');
+        document.body.style.setProperty('--editor-line-min-height', minHeight + 'px');
+        document.body.style.setProperty('--editor-line-padding-left', lineNumberWidth + 15 + 'px');
+    };
+
+    const computeMinLineHeight = node => {
+        const elementStyle = window.getComputedStyle(node.querySelector('div'));
+        return parseInt(elementStyle.getPropertyValue('line-height'));
     };
 
     const computeEdeditorLineNumberWidth = text => {
@@ -45,7 +52,7 @@
     };
 
     const replaceBrByDiv = str => {
-        return str.replace(/(<br>)/gi, '<div>&nbsp;</div>');
+        return str.replace(/(<br>)/gi, '<div></div>');
     };
 
     window.addEventListener('message', ({ data: { type } }) => {
