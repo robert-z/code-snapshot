@@ -1,101 +1,105 @@
 {
-	"name": "code-snapshot",
-	"displayName": "Code Snapshot",
-	"description": "Create your custom code snippet",
-	"version": "0.1.0",
-	"publisher": "robertz",
-	"engines": {
-		"vscode": "^1.41.0"
-	},
-	"icon": "icon.png",
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"snapshot",
-		"snippet",
-		"code",
-		"screenshot",
-		"javascript",
-		"js",
-		"jsx",
-		"flow",
-		"typescript",
-		"ts",
-		"json",
-		"css",
-		"less",
-		"scss",
-		"styled-components",
-		"styled-jsx",
-		"markdown",
-		"md",
-		"commonmark",
-		"mdx",
-		"php",
-		"pug",
-		"ruby",
-		"swift",
-		"html",
-		"vue",
-		"angular",
-		"graphql",
-		"yaml",
-		"yml"
-	],
-	"homepage": "https://marketplace.visualstudio.com/items?itemName=robertz.code-snapshot",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/robert-z/code-snapshot"
-	},
-	"bugs": {
-		"url": "https://github.com/robert-z/code-snapshot/issues"
-	},
-	"activationEvents": [
-		"onCommand:codesnapshot.init"
-	],
-	"main": "./dist/extension",
-	"contributes": {
-		"commands": [
-			{
-				"command": "codesnapshot.init",
-				"title": "Code Snapshot 📸"
-			}
-		],
-		"menus": {
-			"editor/context": [
-				{
-					"command": "codesnapshot.init"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"test": "node ./out/test/runTests.js",
-		"vscode:package": "vsce package",
-		"vscode:publish": "vsce publish",
-		"vscode:prepublish": "webpack --mode production",
-		"watch": "tsc --watch -p ./",
-		"webpack:watch": "webpack --mode development --watch",
-		"webpack": "webpack --mode development"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.11.7",
-		"@types/vscode": "^1.41.0",
-		"copy-webpack-plugin": "^5.1.1",
-		"glob": "^7.1.5",
-		"mocha": "^6.2.2",
-		"ts-loader": "^6.2.1",
-		"tslint": "^5.20.0",
-		"typescript": "^3.6.4",
-		"vscode-test": "^1.2.2",
-		"webpack": "^4.41.5",
-		"webpack-cli": "^3.3.10"
-	},
-	"dependencies": {
-		"dom-to-image": "^2.6.0",
-		"file-saver": "^2.0.2"
-	}
+    "name": "code-snapshot",
+    "displayName": "Code Snapshot",
+    "description": "Create your custom code snippet",
+    "version": "0.1.0",
+    "publisher": "robertz",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "icon": "icon.png",
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "snapshot",
+        "snippet",
+        "code",
+        "screenshot",
+        "javascript",
+        "js",
+        "jsx",
+        "flow",
+        "typescript",
+        "ts",
+        "json",
+        "css",
+        "less",
+        "scss",
+        "styled-components",
+        "styled-jsx",
+        "markdown",
+        "md",
+        "commonmark",
+        "mdx",
+        "php",
+        "pug",
+        "ruby",
+        "swift",
+        "html",
+        "vue",
+        "angular",
+        "graphql",
+        "yaml",
+        "yml"
+    ],
+    "homepage": "https://marketplace.visualstudio.com/items?itemName=robertz.code-snapshot",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/robert-z/code-snapshot"
+    },
+    "bugs": {
+        "url": "https://github.com/robert-z/code-snapshot/issues"
+    },
+    "activationEvents": [
+        "onCommand:codesnapshot.init"
+    ],
+    "main": "./dist/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "codesnapshot.init",
+                "title": "Code Snapshot 📸"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "codesnapshot.init"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "test": "node ./out/test/runTests.js",
+        "vscode:package": "vsce package",
+        "vscode:publish": "vsce publish",
+        "vscode:prepublish": "webpack --mode production",
+        "watch": "tsc --watch -p ./",
+        "webpack:watch": "webpack --mode development --watch",
+        "webpack": "webpack --mode development"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.11.7",
+        "@types/vscode": "^1.41.0",
+        "@typescript-eslint/eslint-plugin": "^2.18.0",
+        "@typescript-eslint/parser": "^2.18.0",
+        "copy-webpack-plugin": "^5.1.1",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "glob": "^7.1.5",
+        "mocha": "^6.2.2",
+        "prettier": "^1.19.1",
+        "ts-loader": "^6.2.1",
+        "typescript": "^3.6.4",
+        "vscode-test": "^1.2.2",
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "dom-to-image": "^2.6.0",
+        "file-saver": "^2.0.2"
+    }
 }
