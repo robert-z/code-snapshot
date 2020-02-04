@@ -18,7 +18,9 @@ const init = (context: vscode.ExtensionContext) => {
 
     panel.onDidDispose(() => selectionHandler.dispose());
 
-    if (hasTextSelected(activeTextEditor?.selection)) update(panel);
+    if (hasTextSelected(activeTextEditor?.selection)) {
+        update(panel);
+    }
 };
 
 const createPanel = (context: vscode.ExtensionContext): vscode.WebviewPanel => {

@@ -1,15 +1,15 @@
 {
-    "files.exclude": {
-        "out": false
-    },
-    "search.exclude": {
-        "out": true
-    },
-    "typescript.tsc.autoDetect": "off",
-    "editor.codeActionsOnSave": {
-        "source.fixAll.tslint": true
-    },
-    "editor.formatOnSave": true,
-    "editor.formatOnType": false,
-    "files.eol": "\n"
+  "files.exclude": {
+    "out": false
+  },
+  "search.exclude": {
+    "out": true
+  },
+  "typescript.tsc.autoDetect": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "files.eol": "\n"
 }
