@@ -26,6 +26,11 @@ body {
     display: flex;
     align-items: flex-end;
 }
+.header__background {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
 .header__checkbox {
     display: flex;
     align-items: center;
@@ -184,4 +189,5 @@ input[type='checkbox']:checked + label:before {
     height: 20px;
     margin-left: 0px;
     border-radius: 0px;
+    margin-right: 15px;
 }

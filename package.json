@@ -2,7 +2,7 @@
     "name": "code-snapshot",
     "displayName": "Code Snapshot",
     "description": "Create your custom code snippet",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "publisher": "robertz",
     "engines": {
         "vscode": "^1.41.0"
