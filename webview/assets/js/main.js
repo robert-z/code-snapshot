@@ -1,5 +1,5 @@
-import { pasteCode } from './code.js';
-import { takeSnapShoot } from './snapshoot.js';
+import { pasteCode, showLineNumbers, hideLineNumbers } from './code.js';
+import { takeSnapshot } from './snapshot.js';
 
 (() => {
     const snapshotContainerNode = document.querySelector('.snapshot-container');
@@ -9,6 +9,7 @@ import { takeSnapShoot } from './snapshoot.js';
     const terminalNode = document.querySelector('.terminal');
     const sizeNode = document.querySelector('.header__size');
     const shootNode = document.querySelector('.shoot');
+    const showLineNumbersNode = document.querySelector('#show-line-numbers');
 
     window.addEventListener('message', ({ data: { type } }) => {
         switch (type) {
@@ -22,19 +23,29 @@ import { takeSnapShoot } from './snapshoot.js';
         pasteCode(event.clipboardData);
     });
 
-    shootNode.addEventListener('click', e => {
-        takeSnapShoot();
+    shootNode.addEventListener('click', event => {
+        takeSnapshot();
+    });
+
+    showLineNumbersNode.addEventListener('change', event => {
+        const checkbox = event.target;
+
+        if (checkbox.checked) {
+            showLineNumbers();
+        } else {
+            hideLineNumbers();
+        }
     });
 
     window.addEventListener('colorPickerChange', function(data) {
-        let i = data.detail.el;
-        snapshotContainerBackgroundNode.style.backgroundColor = i.value;
+        const color = data.detail.el.value;
+        snapshotContainerBackgroundNode.style.backgroundColor = color;
     });
 
     colorPicker.initAll();
 
     if (ResizeObserver) {
-        const resizeObserver = new ResizeObserver(entries => {
+        const resizeObserver = new ResizeObserver(() => {
             let width = Math.round(snapshotContainerNode.offsetWidth) * 2;
             let height = Math.round(snapshotContainerNode.offsetHeight) * 2;
 

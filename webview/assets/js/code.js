@@ -1,4 +1,9 @@
+import { setProperty } from './utils.js';
+
 const terminalCodeSnippetNode = document.querySelector('.terminal__code-snippet');
+let lineNumberWidth;
+let minHeight;
+const PADDING_LEFT_EXTRA_PX = 15;
 
 const getHtml = clip => clip.getData('text/html');
 
@@ -15,12 +20,12 @@ const setupTerminal = node => {
         row.insertBefore(lineNumber, row.firstChild);
     });
 
-    const lineNumberWidth = computeEdeditorLineNumberWidth(lines.length);
-    const minHeight = computeMinLineHeight(node);
+    lineNumberWidth = computeEdeditorLineNumberWidth(lines.length);
+    minHeight = computeMinLineHeight(node);
 
-    document.body.style.setProperty('--editor-line-number-width', lineNumberWidth + 'px');
-    document.body.style.setProperty('--editor-line-min-height', minHeight + 'px');
-    document.body.style.setProperty('--editor-line-padding-left', lineNumberWidth + 15 + 'px');
+    setProperty('editor-line-number-width', lineNumberWidth + 'px');
+    setProperty('editor-line-min-height', minHeight + 'px');
+    setProperty('editor-line-padding-left', lineNumberWidth + PADDING_LEFT_EXTRA_PX + 'px');
 };
 
 const computeMinLineHeight = node => {
@@ -38,11 +43,23 @@ const computeEdeditorLineNumberWidth = text => {
 };
 
 const replaceBrByDiv = str => {
-    return str.replace(/(<br>)/gi, '<div></div>');
+    return str.replace(/<br>/gi, '<div></div>');
 };
 
 export const pasteCode = clip => {
     const code = getHtml(clip);
     terminalCodeSnippetNode.innerHTML = code;
     setupTerminal(terminalCodeSnippetNode);
+};
+
+export const showLineNumbers = () => {
+    const editorLineNumbers = document.querySelectorAll('.editorLineNumber');
+    editorLineNumbers.forEach(element => (element.style.display = 'block'));
+    setProperty('editor-line-padding-left', lineNumberWidth + PADDING_LEFT_EXTRA_PX + 'px');
+};
+
+export const hideLineNumbers = () => {
+    const editorLineNumbers = document.querySelectorAll('.editorLineNumber');
+    editorLineNumbers.forEach(element => (element.style.display = 'none'));
+    setProperty('editor-line-padding-left', '0px');
 };

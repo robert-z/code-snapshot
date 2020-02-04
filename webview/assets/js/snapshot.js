@@ -2,7 +2,7 @@ const snapshotContainerNode = document.querySelector('.snapshot-container');
 const snapshotContainerBackgroundNode = document.querySelector('.snapshot-container__background');
 const terminalNode = document.querySelector('.terminal');
 
-export const takeSnapShoot = () => {
+export const takeSnapshot = () => {
     snapshotContainerNode.style.resize = 'none';
     terminalNode.style.resize = 'none';
 
