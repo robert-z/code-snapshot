@@ -2,7 +2,7 @@
     "name": "code-snapshot",
     "displayName": "Code Snapshot",
     "description": "Create your custom code snippet",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "publisher": "robertz",
     "engines": {
         "vscode": "^1.41.0"
@@ -54,7 +54,7 @@
     "activationEvents": [
         "onCommand:codesnapshot.init"
     ],
-    "main": "./dist/extension",
+    "main": "./src/extension",
     "contributes": {
         "commands": [
             {

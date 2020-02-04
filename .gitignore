@@ -1,5 +1,6 @@
 out
-dist
+src/extension.js
+src/extension.js.map
 node_modules
 .vscode-test/
 *.vsix
