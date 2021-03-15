@@ -28,7 +28,7 @@ export const takeSnapshot = () => {
             .toSvg(snapshotContainerBackgroundNode, options)
             .then(function(dataUrl) {
                 resetStyles();
-                var link = document.createElement('a');
+                const link = document.createElement('a');
                 link.download = 'code-snapshot.svg';
                 link.href = dataUrl;
                 link.click();
