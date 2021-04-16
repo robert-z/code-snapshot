@@ -45,12 +45,14 @@ const createPanel = (context: vscode.ExtensionContext): vscode.WebviewPanel => {
 
 const getTemplate = (htmlTemplatePath: string, panel: vscode.WebviewPanel): string => {
     const htmlContent = fs.readFileSync(htmlTemplatePath, 'utf-8');
-    return htmlContent.replace(/(src|href)="([^"]*)"/gu, (_, match, src) => {
-        let assetsPath = panel.webview.asWebviewUri(
-            vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src))
-        );
-        return `${match}="${assetsPath}"`;
-    });
+    return htmlContent
+        .replace(/%CSP_SOURCE%/gu, panel.webview.cspSource)
+        .replace(/(src|href)="([^"]*)"/gu, (_, match, src) => {
+            let assetsPath = panel.webview.asWebviewUri(
+                vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src))
+            );
+            return `${match}="${assetsPath}"`;
+        });
 };
 
 const update = (panel: vscode.WebviewPanel): void => {
