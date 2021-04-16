@@ -38,19 +38,17 @@ const createPanel = (context: vscode.ExtensionContext): vscode.WebviewPanel => {
 
     panel.iconPath = vscode.Uri.file(iconPath);
 
-    panel.webview.html = getTemplate(htmlTemplatePath);
+    panel.webview.html = getTemplate(htmlTemplatePath, panel);
 
     return panel;
 };
 
-const getTemplate = (htmlTemplatePath: string): string => {
+const getTemplate = (htmlTemplatePath: string, panel: vscode.WebviewPanel): string => {
     const htmlContent = fs.readFileSync(htmlTemplatePath, 'utf-8');
     return htmlContent.replace(/(src|href)="([^"]*)"/gu, (_, match, src) => {
-        let assetsPath = vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src))
-            .with({
-                scheme: 'vscode-resource'
-            })
-            .toString();
+        let assetsPath = panel.webview.asWebviewUri(
+            vscode.Uri.file(path.resolve(htmlTemplatePath, '..', src))
+        );
         return `${match}="${assetsPath}"`;
     });
 };
