@@ -15,6 +15,9 @@ import { takeSnapshot } from './snapshot.js';
         switch (type) {
             case 'updateCode':
                 document.execCommand('paste');
+                if (!showLineNumbersNode.checked) {
+                    hideLineNumbers();
+                }
                 break;
         }
     });
