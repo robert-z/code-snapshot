@@ -2,7 +2,7 @@ const snapshotContainerNode = document.querySelector('.snapshot-container');
 const snapshotContainerBackgroundNode = document.querySelector('.snapshot-container__background');
 const terminalNode = document.querySelector('.terminal');
 
-export const takeSnapshot = () => {
+export const takeSnapshot = (filename) => {
     snapshotContainerNode.style.resize = 'none';
     terminalNode.style.resize = 'none';
 
@@ -20,6 +20,6 @@ export const takeSnapshot = () => {
         .then(function(blob) {
             snapshotContainerNode.style.resize = '';
             terminalNode.style.resize = '';
-            window.saveAs(blob, 'code-snapshot.png');
+            window.saveAs(blob, filename);
         });
 };

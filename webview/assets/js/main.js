@@ -1,4 +1,4 @@
-import { pasteCode, showLineNumbers, hideLineNumbers } from './code.js';
+import { pasteCode, showLineNumbers, hideLineNumbers, getCurrentTimeString } from './code.js';
 import { takeSnapshot } from './snapshot.js';
 
 (() => {
@@ -27,7 +27,8 @@ import { takeSnapshot } from './snapshot.js';
     });
 
     shootNode.addEventListener('click', event => {
-        takeSnapshot();
+        const filename = `${getCurrentTimeString()}.png`;
+        takeSnapshot(filename);
     });
 
     showLineNumbersNode.addEventListener('change', event => {

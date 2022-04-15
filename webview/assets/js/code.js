@@ -63,3 +63,20 @@ export const hideLineNumbers = () => {
     editorLineNumbers.forEach(element => (element.style.display = 'none'));
     setProperty('editor-line-padding-left', '0px');
 };
+
+
+export const getCurrentTimeString = () => {
+            
+        // get current time in string format for use in filename
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+        const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+        const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        const milliseconds = date.getMilliseconds() < 10 ? '00' + date.getMilliseconds() : date.getMilliseconds() < 100 ? '0' + date.getMilliseconds() : date.getMilliseconds();
+        const filename = `code-snapshot-${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
+
+        return filename;
+};
