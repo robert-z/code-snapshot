@@ -86,17 +86,17 @@
         "@types/vscode": "^1.41.0",
         "@typescript-eslint/eslint-plugin": "^2.18.0",
         "@typescript-eslint/parser": "^2.18.0",
-        "copy-webpack-plugin": "^5.1.1",
+        "copy-webpack-plugin": "^11.0.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.0",
         "glob": "^7.1.5",
         "mocha": "^6.2.2",
         "prettier": "^1.19.1",
-        "ts-loader": "^6.2.1",
+        "ts-loader": "^9.4.2",
         "typescript": "^3.6.4",
         "vscode-test": "^1.2.2",
-        "webpack": "^4.41.5",
-        "webpack-cli": "^3.3.10"
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.0.1"
     },
     "dependencies": {
         "dom-to-image": "^2.6.0",
