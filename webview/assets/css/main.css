@@ -78,6 +78,9 @@ body {
     min-width: 54px;
     min-height: 14px;
 }
+.terminal code {
+    background-color: transparent;
+}
 .terminal__header {
     margin-bottom: 15px;
 }
